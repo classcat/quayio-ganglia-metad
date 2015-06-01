@@ -7,7 +7,7 @@ MAINTAINER ClassCat Co.,Ltd. <support@classcat.com>
 ########################################################################
 
 #--- HISTORY -----------------------------------------------------------
-# 02-jun-15 : created.
+# 02-jun-15 : created for quay.io.
 #-----------------------------------------------------------------------
 
 ENV DEBIAN_FRONTEND noninteractive
