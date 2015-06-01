@@ -10,6 +10,8 @@ MAINTAINER ClassCat Co.,Ltd. <support@classcat.com>
 # 02-jun-15 : created.
 #-----------------------------------------------------------------------
 
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt-get update && apt-get -y upgrade \
   && apt-get install -y language-pack-en language-pack-en-base \
   && apt-get install -y language-pack-ja language-pack-ja-base \
