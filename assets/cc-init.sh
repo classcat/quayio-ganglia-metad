@@ -6,6 +6,7 @@
 ########################################################################
 
 #--- HISTORY -----------------------------------------------------------
+# 02-jun-15 : ganglia-monitor required.
 # 02-jun-15 : created.
 #-----------------------------------------------------------------------
 
@@ -50,6 +51,42 @@ function put_public_key() {
 ### GANGLIA ###
 ###############
 
+function config_ganglia_monitor() {
+
+  mkdir -p /etc/ganglia/conf.d
+  cat << _EOT_ > /etc/ganglia/conf.d/cc-gmond.conf
+cluster { 
+  name = "${CLUSTER_NAME}" 
+  /* name = "unspecified" */
+  owner = "unspecified" 
+  latlong = "unspecified" 
+  url = "unspecified" 
+} 
+
+host { 
+  location = "unspecified" 
+} 
+
+/*
+udp_send_channel { 
+  mcast_join = 239.2.11.71
+  host = ${HOST_TO_SEND}
+  port = 8649 
+  ttl = 1 
+} */
+
+udp_recv_channel { 
+  /* mcast_join = 239.2.11.71  */
+  port = 8649 
+  /* bind = 239.2.11.71 */
+} 
+
+tcp_accept_channel { 
+  port = 8649 
+} 
+_EOT_
+}
+
 function config_ganglia_gmetad() {
   cat << _EOT_ > /etc/ganglia/gmetad.conf
 data_source "${CLUSTER_NAME}" 60 localhost
@@ -83,6 +120,7 @@ EOF
 init
 change_root_password
 put_public_key
+config_ganglia_monitor
 config_ganglia_gmetad
 proc_supervisor
 
