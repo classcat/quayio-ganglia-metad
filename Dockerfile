@@ -26,6 +26,7 @@ RUN apt-get update && apt-get -y upgrade \
 # RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
 COPY assets/supervisord.conf /etc/supervisor/supervisord.conf
+COPY assets/gmond.conf /etc/ganglia/gmond.conf
 
 WORKDIR /opt
 ADD assets/cc-init.sh /opt/cc-init.sh
